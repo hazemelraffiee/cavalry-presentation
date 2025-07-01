@@ -94,8 +94,11 @@ const CavalryPresentation = () => {
         <CurrentSlideComponent />
       </div>
 
-      {/* Navigation */}
-      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex items-center space-x-4">
+      {/* Navigation - Only show on first and last slides */}
+      <div className={cn(
+        "absolute bottom-6 left-1/2 transform -translate-x-1/2 flex items-center space-x-4 transition-opacity duration-300",
+        (currentSlide === 0 || currentSlide === slides.length - 1) ? "opacity-100" : "opacity-0 pointer-events-none"
+      )}>
         <Button 
           onClick={prevSlide}
           variant="ghost"

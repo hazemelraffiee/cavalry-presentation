@@ -5,7 +5,7 @@ const ResistanceSlide = () => {
         <img 
           src={`${import.meta.env.BASE_URL}img/5.png`} 
           alt="Traditional commanders dismissing cavalry" 
-          className="w-full h-64 object-cover rounded-lg shadow-2xl mb-10 opacity-0 animate-rotateIn border-2 border-amber-800/30"
+          className="w-full max-w-2xl h-96 object-contain rounded-lg shadow-2xl mb-8 opacity-0 animate-rotateIn border-2 border-amber-800/30 mx-auto"
         />
         <h2 className="text-5xl font-bold text-amber-100 mb-8 opacity-0 animate-fadeInUp animation-delay-300 text-center">But The Old Guard Resisted</h2>
         <div className="grid grid-cols-2 gap-8 text-xl text-amber-200/80 max-w-4xl mx-auto">
