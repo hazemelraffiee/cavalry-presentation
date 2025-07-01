@@ -7,9 +7,9 @@ const TransformationSlide = () => {
           <img 
             src={`${import.meta.env.BASE_URL}img/4-A.png`} 
             alt="Exhausted foot soldiers losing battle"
-            className="w-full h-72 rounded mb-6 object-cover opacity-0 animate-scaleIn animation-delay-200"
+            className="w-full h-64 rounded-lg mb-4 object-contain opacity-0 animate-scaleIn animation-delay-200"
           />
-          <ul className="text-xl text-gray-300 space-y-3">
+          <ul className="text-lg text-gray-300 space-y-2">
             <li className="opacity-0 animate-staggerFadeIn animation-delay-400">• Limited mobility</li>
             <li className="opacity-0 animate-staggerFadeIn animation-delay-500">• Ground-level perspective</li>
             <li className="opacity-0 animate-staggerFadeIn animation-delay-600">• Predictable tactics</li>
@@ -21,9 +21,9 @@ const TransformationSlide = () => {
           <img 
             src={`${import.meta.env.BASE_URL}img/4-B.png`} 
             alt="Triumphant mounted warriors"
-            className="w-full h-72 rounded mb-6 object-cover opacity-0 animate-scaleIn animation-delay-1000"
+            className="w-full h-64 rounded-lg mb-4 object-contain opacity-0 animate-scaleIn animation-delay-1000"
           />
-          <ul className="text-xl text-amber-100 space-y-3">
+          <ul className="text-lg text-amber-100 space-y-2">
             <li className="opacity-0 animate-staggerFadeIn" style={{ animationDelay: '1200ms' }}>• Rapid positioning</li>
             <li className="opacity-0 animate-staggerFadeIn" style={{ animationDelay: '1300ms' }}>• Superior vantage point</li>
             <li className="opacity-0 animate-staggerFadeIn" style={{ animationDelay: '1400ms' }}>• Unpredictable strikes</li>
