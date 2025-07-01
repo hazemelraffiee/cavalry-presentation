@@ -1,7 +1,9 @@
+import LazyImage from '../LazyImage';
+
 const MountUpSlide = () => {
   return (
     <div className="h-full bg-gradient-to-br from-yellow-900 via-orange-900 to-red-900 flex flex-col justify-center items-center text-center">
-      <img 
+      <LazyImage 
         src={`${import.meta.env.BASE_URL}img/11.png`} 
         alt="Developer confidently working with AI tools, sunrise lighting" 
         className="w-full max-w-4xl h-80 object-contain rounded-lg shadow-2xl mb-8 opacity-0 animate-scaleIn"

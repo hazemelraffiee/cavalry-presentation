@@ -1,8 +1,10 @@
+import LazyImage from '../LazyImage';
+
 const HorsesArriveSlide = () => {
   return (
     <div className="h-full bg-gradient-to-br from-orange-900 via-red-900 to-amber-800 flex flex-col justify-center items-center">
       <div className="text-center mb-8">
-        <img 
+        <LazyImage 
           src={`${import.meta.env.BASE_URL}img/3.png`} 
           alt="Dramatic cavalry cresting hill with dust clouds and banners"
           className="w-full max-w-5xl h-96 rounded-lg shadow-2xl mx-auto object-cover animate-rotateIn"

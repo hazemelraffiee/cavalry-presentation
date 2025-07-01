@@ -1,8 +1,10 @@
+import LazyImage from '../LazyImage';
+
 const ResistanceSlide = () => {
   return (
     <div className="h-full bg-gradient-to-br from-amber-950 via-stone-900 to-zinc-900 flex flex-col justify-center items-center">
       <div className="w-full max-w-6xl px-12">
-        <img 
+        <LazyImage 
           src={`${import.meta.env.BASE_URL}img/5.png`} 
           alt="Traditional commanders dismissing cavalry" 
           className="w-full max-w-2xl h-96 object-contain rounded-lg shadow-2xl mb-8 opacity-0 animate-rotateIn border-2 border-amber-800/30 mx-auto"

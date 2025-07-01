@@ -1,10 +1,12 @@
+import LazyImage from '../LazyImage';
+
 const TransformationSlide = () => {
   return (
     <div className="h-full bg-gradient-to-br from-slate-900 to-red-900">
       <div className="grid grid-cols-2 h-full">
         <div className="p-8 flex flex-col justify-center bg-gray-800/70">
           <h3 className="text-4xl font-bold text-red-300 mb-6 opacity-0 animate-fadeInDown">Foot Soldiers</h3>
-          <img 
+          <LazyImage 
             src={`${import.meta.env.BASE_URL}img/4-A.png`} 
             alt="Exhausted foot soldiers losing battle"
             className="w-full h-64 rounded-lg mb-4 object-contain opacity-0 animate-scaleIn animation-delay-200"
@@ -18,7 +20,7 @@ const TransformationSlide = () => {
         </div>
         <div className="p-8 flex flex-col justify-center bg-amber-800/40">
           <h3 className="text-4xl font-bold text-yellow-300 mb-6 opacity-0 animate-fadeInDown animation-delay-800">Cavalry</h3>
-          <img 
+          <LazyImage 
             src={`${import.meta.env.BASE_URL}img/4-B.png`} 
             alt="Triumphant mounted warriors"
             className="w-full h-64 rounded-lg mb-4 object-contain opacity-0 animate-scaleIn animation-delay-1000"

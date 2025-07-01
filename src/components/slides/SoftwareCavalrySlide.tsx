@@ -1,4 +1,5 @@
 import { Code, TestTube, Cpu } from 'lucide-react';
+import LazyImage from '../LazyImage';
 
 const SoftwareCavalrySlide = () => {
   return (
@@ -6,7 +7,7 @@ const SoftwareCavalrySlide = () => {
       <div className="grid grid-cols-2 h-full">
         <div className="p-8 flex flex-col justify-center bg-gray-800/50">
           <h3 className="text-4xl font-bold text-red-300 mb-6 opacity-0 animate-fadeInDown">Without AI</h3>
-          <img 
+          <LazyImage 
             src={`${import.meta.env.BASE_URL}img/9-A.png`} 
             alt="Developer struggling with traditional debugging and testing" 
             className="w-full h-60 object-contain rounded mb-4 opacity-0 animate-scaleIn animation-delay-200"
@@ -20,7 +21,7 @@ const SoftwareCavalrySlide = () => {
         </div>
         <div className="p-8 flex flex-col justify-center bg-teal-800/30">
           <h3 className="text-4xl font-bold text-emerald-300 mb-6 opacity-0 animate-fadeInDown animation-delay-800">With AI</h3>
-          <img 
+          <LazyImage 
             src={`${import.meta.env.BASE_URL}img/9-B.png`} 
             alt="Developer with AI assistance, multiple screens, efficient workflow" 
             className="w-full h-60 object-contain rounded mb-4 opacity-0 animate-scaleIn animation-delay-1000"

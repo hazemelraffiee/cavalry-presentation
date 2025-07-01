@@ -22,7 +22,7 @@ const CavalryPresentation = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [slideDirection, setSlideDirection] = useState<'left' | 'right'>('right');
-  const { isLoading, loadedCount, totalCount } = useImagePreloader();
+  const { isInitialLoading } = useImagePreloader();
 
   const slides: Slide[] = [
     { id: 'title', component: TitleSlide },
@@ -81,19 +81,13 @@ const CavalryPresentation = () => {
 
   const CurrentSlideComponent = slides[currentSlide].component;
 
-  // Show loading screen while images are preloading
-  if (isLoading) {
+  // Show loading screen only while first image is loading
+  if (isInitialLoading) {
     return (
       <div className="w-full h-screen bg-gradient-to-br from-amber-900 to-red-900 flex flex-col items-center justify-center">
         <Loader2 className="w-16 h-16 text-white animate-spin mb-4" />
         <h2 className="text-2xl font-bold text-white mb-2">Preparing Your Journey...</h2>
-        <p className="text-white/80">Loading images ({loadedCount}/{totalCount})</p>
-        <div className="w-64 h-2 bg-white/20 rounded-full mt-4 overflow-hidden">
-          <div 
-            className="h-full bg-white/80 transition-all duration-300"
-            style={{ width: `${(loadedCount / totalCount) * 100}%` }}
-          />
-        </div>
+        <p className="text-white/80">Loading first slide...</p>
       </div>
     );
   }

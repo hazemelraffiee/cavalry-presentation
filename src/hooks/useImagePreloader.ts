@@ -1,21 +1,30 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 interface ImagePreloaderState {
-  isLoading: boolean;
+  isInitialLoading: boolean;
+  isBackgroundLoading: boolean;
   loadedCount: number;
   totalCount: number;
   error: string | null;
+  loadedImages: Set<string>;
 }
 
 export const useImagePreloader = () => {
   const [state, setState] = useState<ImagePreloaderState>({
-    isLoading: true,
+    isInitialLoading: true,
+    isBackgroundLoading: true,
     loadedCount: 0,
     totalCount: 0,
-    error: null
+    error: null,
+    loadedImages: new Set()
   });
+  
+  const isPreloadingRef = useRef(false);
 
   useEffect(() => {
+    if (isPreloadingRef.current) return;
+    isPreloadingRef.current = true;
+
     const baseUrl = import.meta.env.BASE_URL;
     
     // List all images to preload
@@ -37,18 +46,15 @@ export const useImagePreloader = () => {
 
     setState(prev => ({ ...prev, totalCount: imageUrls.length }));
 
-    let loadedImages = 0;
-
     const preloadImage = (url: string): Promise<void> => {
       return new Promise((resolve, reject) => {
         const img = new Image();
         
         img.onload = () => {
-          loadedImages++;
           setState(prev => ({ 
             ...prev, 
-            loadedCount: loadedImages,
-            isLoading: loadedImages < imageUrls.length 
+            loadedCount: prev.loadedCount + 1,
+            loadedImages: new Set([...prev.loadedImages, url])
           }));
           resolve();
         };
@@ -61,24 +67,50 @@ export const useImagePreloader = () => {
       });
     };
 
-    // Preload all images
-    Promise.all(imageUrls.map(preloadImage))
+    // First, load the first image
+    preloadImage(imageUrls[0])
       .then(() => {
+        // Mark initial loading as complete after first image loads
         setState(prev => ({ 
           ...prev, 
-          isLoading: false,
-          loadedCount: imageUrls.length
+          isInitialLoading: false 
         }));
+        
+        // Then load the rest in the background
+        const remainingImages = imageUrls.slice(1);
+        
+        // Load remaining images sequentially to maintain order and avoid overwhelming the browser
+        const loadRemainingImages = async () => {
+          for (const url of remainingImages) {
+            try {
+              await preloadImage(url);
+            } catch (error) {
+              console.error('Error preloading image:', error);
+            }
+          }
+          
+          // Mark background loading as complete
+          setState(prev => ({ 
+            ...prev, 
+            isBackgroundLoading: false 
+          }));
+        };
+        
+        loadRemainingImages();
       })
       .catch((error) => {
-        console.error('Error preloading images:', error);
+        console.error('Error preloading first image:', error);
         setState(prev => ({ 
           ...prev, 
-          isLoading: false,
+          isInitialLoading: false,
+          isBackgroundLoading: false,
           error: error.message
         }));
       });
   }, []);
 
-  return state;
+  return {
+    ...state,
+    isImageLoaded: (url: string) => state.loadedImages.has(url)
+  };
 };

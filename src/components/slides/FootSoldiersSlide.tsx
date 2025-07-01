@@ -1,8 +1,10 @@
+import LazyImage from '../LazyImage';
+
 const FootSoldiersSlide = () => {
   return (
     <div className="h-full flex items-center bg-gradient-to-br from-gray-700 to-gray-900">
       <div className="w-1/2 p-12">
-        <img 
+        <LazyImage 
           src={`${import.meta.env.BASE_URL}img/2.png`} 
           alt="Medieval foot soldiers in formation with swords and shields"
           className="w-full h-80 rounded-lg shadow-2xl object-cover animate-fadeInDown"

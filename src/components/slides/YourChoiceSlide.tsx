@@ -1,7 +1,9 @@
+import LazyImage from '../LazyImage';
+
 const YourChoiceSlide = () => {
   return (
     <div className="h-full bg-gradient-to-br from-orange-900 to-red-900 flex flex-col justify-center items-center text-center">
-      <img 
+      <LazyImage 
         src={`${import.meta.env.BASE_URL}img/10.png`} 
         alt="Split path: traditional coding vs AI-enhanced development" 
         className="w-full max-w-4xl h-96 object-contain rounded-lg shadow-2xl mb-8 opacity-0 animate-rotateIn"

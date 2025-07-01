@@ -1,8 +1,10 @@
+import LazyImage from '../LazyImage';
+
 const TitleSlide = () => {
   return (
     <div className="h-full flex flex-col justify-center items-center text-center bg-gradient-to-br from-amber-900 via-yellow-800 to-orange-900">
       <div className="mb-8 p-6 border-2 border-yellow-600 rounded-lg bg-yellow-900/30 animate-scaleIn">
-        <img 
+        <LazyImage 
           src={`${import.meta.env.BASE_URL}img/1.png`} 
           alt="Epic cavalry charge on ancient battlefield"
           className="w-96 h-60 rounded object-cover"

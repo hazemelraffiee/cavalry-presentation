@@ -1,4 +1,6 @@
 import { Zap, TrendingUp, Brain, Users } from 'lucide-react';
+import LazyImage from '../LazyImage';
+
 const AICavalrySlide = () => {
   return (
     <div className="h-full bg-gradient-to-br from-cyan-900 to-blue-900 flex items-center">
@@ -24,7 +26,7 @@ const AICavalrySlide = () => {
         </div>
       </div>
       <div className="w-1/2 p-12">
-        <img 
+        <LazyImage 
           src={`${import.meta.env.BASE_URL}img/8.png`} 
           alt="Software engineer collaborating with AI, futuristic setup" 
           className="w-full h-96 object-contain rounded-lg shadow-2xl opacity-0 animate-scaleIn animation-delay-200"

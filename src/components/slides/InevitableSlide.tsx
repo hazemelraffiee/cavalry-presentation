@@ -1,8 +1,10 @@
+import LazyImage from '../LazyImage';
+
 const InevitableSlide = () => {
   return (
     <div className="h-full bg-gradient-to-br from-stone-700 via-amber-800/70 to-emerald-900/60 flex flex-col justify-center items-center text-center">
       <div className="w-full px-6">
-        <img 
+        <LazyImage 
           src={`${import.meta.env.BASE_URL}img/6.png`} 
           alt="Cavalry becoming the new standard across armies" 
           className="w-full max-w-7xl h-[420px] object-cover rounded-lg shadow-2xl mb-6 opacity-0 animate-scaleIn mx-auto"

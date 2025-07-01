@@ -1,10 +1,12 @@
 import { ArrowRight, Brain } from 'lucide-react';
 
+import LazyImage from '../LazyImage';
+
 const RevealSlide = () => {
   return (
     <div className="h-full bg-gradient-to-br from-blue-900 via-purple-900 to-slate-900 flex flex-col justify-center items-center text-center">
       <div className="mb-8">
-        <img 
+        <LazyImage 
           src={`${import.meta.env.BASE_URL}img/7.png`} 
           alt="Modern professional at computer with AI interface, transition from horses to technology" 
           className="w-full max-w-3xl h-72 object-contain rounded-lg shadow-2xl mx-auto opacity-0 animate-rotateIn"

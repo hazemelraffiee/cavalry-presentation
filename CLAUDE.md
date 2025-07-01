@@ -21,13 +21,14 @@ src/
 ├── components/
 │   ├── ui/                      # shadcn/ui components
 │   ├── cavalry-presentation.tsx # Main presentation component
+│   ├── LazyImage.tsx           # Smart image component with loading state
 │   └── slides/                  # Individual slide components
 │       ├── index.ts            # Barrel export
 │       ├── types.ts            # TypeScript interfaces
 │       └── [SlideNames].tsx    # 11 individual slide components
 ├── hooks/
 │   ├── index.ts                # Hook exports
-│   └── useImagePreloader.ts    # Image preloading hook
+│   └── useImagePreloader.ts    # Smart image preloading hook
 ├── styles/
 │   └── animations.css          # Custom animation keyframes
 ├── lib/
@@ -94,8 +95,12 @@ public/
 - Transitions use CSS animations defined in `animations.css`
 - Each slide component is lazy-loaded when needed
 - Navigation has circular navigation (wraps from last to first slide)
-- Images are preloaded on initial load with progress indicator
-- Custom `useImagePreloader` hook handles all image loading
+- Smart image preloading system:
+  - Only the first slide's image is loaded before showing the presentation
+  - Remaining images load in the background sequentially
+  - `LazyImage` component shows loading indicator for images not yet loaded
+  - Provides seamless experience when navigating at normal speed
+- Custom `useImagePreloader` hook tracks loading state for all images
 
 ## Important Notes
 
