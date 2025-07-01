@@ -24,7 +24,7 @@ This presentation tells the story of how mounted cavalry changed ancient warfare
 
 1. Clone the repository:
 ```bash
-git clone [your-repo-url]
+git clone https://github.com/hazemelraffiee/cavalry-presentation.git
 cd cavalry-presentation
 ```
 
@@ -39,6 +39,35 @@ npm run dev
 ```
 
 4. Open your browser to `http://localhost:5173`
+
+## Live Demo
+
+🌐 **Visit the live presentation:** [https://hazemelraffiee.github.io/cavalry-presentation/](https://hazemelraffiee.github.io/cavalry-presentation/)
+
+## Deployment
+
+This project is automatically deployed to GitHub Pages using GitHub Actions.
+
+### Automatic Deployment
+
+Every push to the `main` branch triggers an automatic deployment via GitHub Actions. The workflow:
+1. Builds the project
+2. Deploys to GitHub Pages
+3. Makes the site available at the URL above
+
+### Manual Deployment Check
+
+To check the deployment status:
+```bash
+./check-deployment.sh
+```
+
+### Repository Settings
+
+GitHub Pages is configured to deploy from GitHub Actions. If you fork this repository:
+1. Go to Settings → Pages
+2. Under "Source", select "GitHub Actions"
+3. Save the changes
 
 ## Usage
 
