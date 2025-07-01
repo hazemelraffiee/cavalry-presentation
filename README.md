@@ -9,7 +9,10 @@ This presentation tells the story of how mounted cavalry changed ancient warfare
 ## Features
 
 - **Interactive Navigation**: Use arrow keys or click navigation buttons to move through slides
+- **Smooth Animations**: Custom CSS animations for slide transitions and content entrance
+- **Image Preloading**: All images are preloaded with a progress indicator for seamless presentation
 - **Visual Storytelling**: Engaging gradients and layouts that enhance the narrative
+- **AI-Generated Images**: Beautiful visuals created with AI to illustrate each concept
 - **Responsive Design**: Built with Tailwind CSS v4 for a beautiful experience on any screen
 - **Modern Stack**: React 19, TypeScript, Vite, and shadcn/ui components
 
@@ -73,8 +76,9 @@ GitHub Pages is configured to deploy from GitHub Actions. If you fork this repos
 
 ### Navigation
 - **Arrow Keys**: Press `←` and `→` to navigate between slides
-- **Click Navigation**: Use the chevron buttons at the bottom
-- **Slide Indicators**: Click any dot to jump directly to a slide
+- **Click Navigation**: Use the chevron buttons (visible on first and last slides)
+- **Slide Indicators**: Click any dot to jump directly to a slide (visible on first and last slides)
+- **Circular Navigation**: Automatically loops from last slide to first
 
 ### Presentation Flow
 
@@ -113,34 +117,62 @@ GitHub Pages is configured to deploy from GitHub Actions. If you fork this repos
 ```
 src/
 ├── components/
-│   ├── ui/              # shadcn/ui components
-│   └── cavalry-presentation.tsx  # Main presentation component
+│   ├── ui/                      # shadcn/ui components
+│   ├── cavalry-presentation.tsx # Main presentation component
+│   └── slides/                  # Individual slide components
+│       ├── index.ts            # Barrel export
+│       ├── types.ts            # TypeScript interfaces
+│       └── [SlideNames].tsx    # 11 slide components
+├── hooks/
+│   ├── index.ts                # Hook exports
+│   └── useImagePreloader.ts    # Image preloading hook
+├── styles/
+│   └── animations.css          # Custom animation keyframes
 ├── lib/
-│   └── utils.ts         # Utility functions
-├── App.tsx              # Root component
-└── main.tsx            # Application entry point
+│   └── utils.ts                # Utility functions
+├── App.tsx                     # Root component
+└── main.tsx                    # Application entry point
+
+public/
+└── img/                        # AI-generated presentation images
+    ├── 1.png to 11.png        # Main slide images
+    └── 4-A.png, 4-B.png, etc. # Split slide images
+
+docs/
+└── img-prompts.md             # AI image generation prompts
 ```
 
 ## Customization
 
-### Adding Images
+### Updating Images
 
-Currently, the presentation uses placeholder divs with descriptive text. To add actual images:
+The presentation includes AI-generated images for each slide. To update or replace images:
 
-1. Place images in the `public/` directory
-2. Replace the placeholder divs with `<img>` tags:
+1. Place new images in the `public/img/` directory
+2. Follow the naming convention: `1.png` through `11.png` (or `4-A.png` for split slides)
+3. Reference images using Vite's base URL:
 
 ```tsx
-<img src="/your-image.jpg" alt="Description" className="w-full h-60 object-cover rounded" />
+<img 
+  src={`${import.meta.env.BASE_URL}img/1.png`} 
+  alt="Description" 
+  className="w-full h-60 object-cover rounded" 
+/>
 ```
+
+4. See `docs/img-prompts.md` for the original AI prompts used to generate each image
 
 ### Modifying Slides
 
-Edit the `slides` array in `src/components/cavalry-presentation.tsx` to:
-- Change content
-- Add new slides
-- Modify styling
-- Update the narrative
+To modify existing slides or add new ones:
+
+1. **Edit existing slides**: Modify the component in `src/components/slides/[SlideName].tsx`
+2. **Add new slides**:
+   - Create a new component in `src/components/slides/`
+   - Export it from `src/components/slides/index.ts`
+   - Add it to the `slides` array in `src/components/cavalry-presentation.tsx`
+3. **Animations**: Use animation classes from `src/styles/animations.css`
+4. **Styling**: Follow the existing gradient and layout patterns
 
 ### Theming
 

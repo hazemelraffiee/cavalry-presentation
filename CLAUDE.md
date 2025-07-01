@@ -20,11 +20,26 @@ The Cavalry Presentation is an interactive slideshow that uses the historical me
 src/
 ├── components/
 │   ├── ui/                      # shadcn/ui components
-│   └── cavalry-presentation.tsx # Main presentation component
+│   ├── cavalry-presentation.tsx # Main presentation component
+│   └── slides/                  # Individual slide components
+│       ├── index.ts            # Barrel export
+│       ├── types.ts            # TypeScript interfaces
+│       └── [SlideNames].tsx    # 11 individual slide components
+├── hooks/
+│   ├── index.ts                # Hook exports
+│   └── useImagePreloader.ts    # Image preloading hook
+├── styles/
+│   └── animations.css          # Custom animation keyframes
 ├── lib/
 │   └── utils.ts                # Utility functions
 ├── App.tsx                     # Root component
 └── main.tsx                    # Application entry point
+
+docs/
+└── img-prompts.md              # AI image generation prompts
+
+public/
+└── img/                        # Presentation images (1-11.png, 4-A.png, etc.)
 ```
 
 ## Development Guidelines
@@ -37,9 +52,12 @@ src/
 
 ### Component Guidelines
 - The main presentation logic is in `cavalry-presentation.tsx`
-- Each slide is defined in the `slides` array
+- Each slide is now a separate component in `src/components/slides/`
+- All slides implement the `SlideProps` interface from `types.ts`
 - Navigation is handled via keyboard (arrow keys) and UI buttons
+- Navigation controls are only visible on first and last slides
 - Use Tailwind classes for styling, avoiding inline styles
+- Animations are defined in `src/styles/animations.css`
 
 ### Testing Commands
 - Run development server: `npm run dev`
@@ -50,15 +68,20 @@ src/
 ## Common Tasks
 
 ### Adding New Slides
-1. Edit the `slides` array in `src/components/cavalry-presentation.tsx`
-2. Follow the existing slide structure pattern
-3. Maintain consistent styling with gradient backgrounds
-4. Test navigation works correctly with new slides
+1. Create a new component in `src/components/slides/` 
+2. Export it from `src/components/slides/index.ts`
+3. Add it to the `slides` array in `src/components/cavalry-presentation.tsx`
+4. Follow the existing slide structure pattern and implement `SlideProps`
+5. Add appropriate animations using classes from `animations.css`
+6. Maintain consistent styling with gradient backgrounds
+7. Test navigation works correctly with new slides
 
 ### Updating Images
-- Currently using placeholder divs with descriptive text
-- To add real images: place in `public/` directory and reference with `/filename.ext`
-- Maintain consistent sizing with existing image placeholders
+- Images are stored in `public/img/` directory (1.png through 11.png)
+- Reference images using `${import.meta.env.BASE_URL}img/filename.png` for Vite compatibility
+- Image dimensions vary per slide - most are 1536x1024px
+- See `docs/img-prompts.md` for AI generation prompts and dimension specifications
+- Maintain consistent sizing with container constraints in each slide component
 
 ### Modifying Styling
 - Primary styling uses Tailwind gradient utilities
@@ -68,7 +91,11 @@ src/
 ### Performance Considerations
 - Slides use conditional rendering (only current slide is rendered)
 - Keyboard event listeners are properly cleaned up
-- Transitions use CSS for smooth performance
+- Transitions use CSS animations defined in `animations.css`
+- Each slide component is lazy-loaded when needed
+- Navigation has circular navigation (wraps from last to first slide)
+- Images are preloaded on initial load with progress indicator
+- Custom `useImagePreloader` hook handles all image loading
 
 ## Important Notes
 
@@ -88,20 +115,31 @@ src/
 - Keep state management simple unless complexity increases
 
 ## Future Enhancement Ideas
-- Add slide transitions/animations
+- ~~Add slide transitions/animations~~ ✓ Completed
+- ~~Preload images for smoother transitions~~ ✓ Completed
 - Implement presenter notes functionality
 - Add progress bar indicator
 - Support for mobile swipe gestures
 - Export to PDF functionality
 - Timer/presentation mode features
+- Add sound effects for slide transitions
 
 ## Troubleshooting
 
 ### Common Issues
-1. **Images not loading**: Check file paths and ensure images are in `public/` directory
-2. **Navigation not working**: Verify keyboard event listeners are properly attached
-3. **Styling issues**: Check Tailwind classes and ensure no conflicts
-4. **Build errors**: Run `npm install` to ensure all dependencies are installed
+1. **Images not loading**: 
+   - Check file paths and ensure images are in `public/img/` directory
+   - Use `${import.meta.env.BASE_URL}img/filename.png` format for Vite compatibility
+   - Verify the base URL in `vite.config.ts` matches your deployment path
+2. **Navigation not working**: 
+   - Verify keyboard event listeners are properly attached
+   - Check that circular navigation logic is working (modulo operator)
+3. **Styling issues**: 
+   - Check Tailwind classes and ensure no conflicts
+   - Verify animations are imported from `animations.css`
+4. **Build errors**: 
+   - Run `npm install` to ensure all dependencies are installed
+   - Check for TypeScript errors with `npx tsc --noEmit`
 
 ### Debug Commands
 - Check for TypeScript errors: `npx tsc --noEmit`

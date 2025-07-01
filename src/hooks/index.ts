@@ -1,1 +1,1 @@
-// Custom hooks will be added here
+export { useImagePreloader } from './useImagePreloader';
