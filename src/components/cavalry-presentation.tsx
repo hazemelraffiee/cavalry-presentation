@@ -19,6 +19,8 @@ import {
 
 const CavalryPresentation = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [slideDirection, setSlideDirection] = useState<'left' | 'right'>('right');
 
   const slides: Slide[] = [
     { id: 'title', component: TitleSlide },
@@ -35,15 +37,33 @@ const CavalryPresentation = () => {
   ];
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setSlideDirection('right');
+    setTimeout(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+      setIsTransitioning(false);
+    }, 50);
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setSlideDirection('left');
+    setTimeout(() => {
+      setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+      setIsTransitioning(false);
+    }, 50);
   };
 
   const goToSlide = (index: number) => {
-    setCurrentSlide(index);
+    if (isTransitioning || index === currentSlide) return;
+    setIsTransitioning(true);
+    setSlideDirection(index > currentSlide ? 'right' : 'left');
+    setTimeout(() => {
+      setCurrentSlide(index);
+      setIsTransitioning(false);
+    }, 50);
   };
 
   // Keyboard navigation
@@ -62,7 +82,15 @@ const CavalryPresentation = () => {
   return (
     <div className="w-full h-screen bg-black relative overflow-hidden">
       {/* Main slide content */}
-      <div className="w-full h-full transition-all duration-500 ease-in-out">
+      <div 
+        className={cn(
+          "w-full h-full absolute inset-0 will-change-transform",
+          isTransitioning && slideDirection === 'right' && "animate-slideInFromRight",
+          isTransitioning && slideDirection === 'left' && "animate-slideInFromLeft",
+          !isTransitioning && "animate-fadeIn"
+        )}
+        key={currentSlide}
+      >
         <CurrentSlideComponent />
       </div>
 
@@ -73,7 +101,7 @@ const CavalryPresentation = () => {
           variant="ghost"
           size="icon"
           className="bg-white/20 hover:bg-white/30 text-white"
-          disabled={currentSlide === 0}
+          disabled={false}
         >
           <ChevronLeft size={24} />
         </Button>
@@ -99,7 +127,7 @@ const CavalryPresentation = () => {
           variant="ghost"
           size="icon"
           className="bg-white/20 hover:bg-white/30 text-white"
-          disabled={currentSlide === slides.length - 1}
+          disabled={false}
         >
           <ChevronRight size={24} />
         </Button>

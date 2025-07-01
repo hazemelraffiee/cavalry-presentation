@@ -3,27 +3,31 @@ const TransformationSlide = () => {
     <div className="h-full bg-gradient-to-br from-slate-900 to-red-900">
       <div className="grid grid-cols-2 h-full">
         <div className="p-8 flex flex-col justify-center bg-gray-800/70">
-          <h3 className="text-4xl font-bold text-red-300 mb-6">Foot Soldiers</h3>
-          <div className="w-full h-72 bg-gray-700/50 rounded mb-6 flex items-center justify-center text-gray-400">
-            <p>Exhausted foot soldiers losing battle</p>
-          </div>
+          <h3 className="text-4xl font-bold text-red-300 mb-6 opacity-0 animate-fadeInDown">Foot Soldiers</h3>
+          <img 
+            src={`${import.meta.env.BASE_URL}img/4-A.png`} 
+            alt="Exhausted foot soldiers losing battle"
+            className="w-full h-72 rounded mb-6 object-cover opacity-0 animate-scaleIn animation-delay-200"
+          />
           <ul className="text-xl text-gray-300 space-y-3">
-            <li>• Limited mobility</li>
-            <li>• Ground-level perspective</li>
-            <li>• Predictable tactics</li>
-            <li>• <span className="text-red-400 font-bold">Overwhelmed</span></li>
+            <li className="opacity-0 animate-staggerFadeIn animation-delay-400">• Limited mobility</li>
+            <li className="opacity-0 animate-staggerFadeIn animation-delay-500">• Ground-level perspective</li>
+            <li className="opacity-0 animate-staggerFadeIn animation-delay-600">• Predictable tactics</li>
+            <li className="opacity-0 animate-staggerFadeIn animation-delay-700">• <span className="text-red-400 font-bold">Overwhelmed</span></li>
           </ul>
         </div>
         <div className="p-8 flex flex-col justify-center bg-amber-800/40">
-          <h3 className="text-4xl font-bold text-yellow-300 mb-6">Cavalry</h3>
-          <div className="w-full h-72 bg-amber-700/50 rounded mb-6 flex items-center justify-center text-amber-200">
-            <p>Triumphant mounted warriors</p>
-          </div>
+          <h3 className="text-4xl font-bold text-yellow-300 mb-6 opacity-0 animate-fadeInDown animation-delay-800">Cavalry</h3>
+          <img 
+            src={`${import.meta.env.BASE_URL}img/4-B.png`} 
+            alt="Triumphant mounted warriors"
+            className="w-full h-72 rounded mb-6 object-cover opacity-0 animate-scaleIn animation-delay-1000"
+          />
           <ul className="text-xl text-amber-100 space-y-3">
-            <li>• Rapid positioning</li>
-            <li>• Superior vantage point</li>
-            <li>• Unpredictable strikes</li>
-            <li>• <span className="text-yellow-400 font-bold">Dominant</span></li>
+            <li className="opacity-0 animate-staggerFadeIn" style={{ animationDelay: '1200ms' }}>• Rapid positioning</li>
+            <li className="opacity-0 animate-staggerFadeIn" style={{ animationDelay: '1300ms' }}>• Superior vantage point</li>
+            <li className="opacity-0 animate-staggerFadeIn" style={{ animationDelay: '1400ms' }}>• Unpredictable strikes</li>
+            <li className="opacity-0 animate-staggerFadeIn" style={{ animationDelay: '1500ms' }}>• <span className="text-yellow-400 font-bold">Dominant</span></li>
           </ul>
         </div>
       </div>
